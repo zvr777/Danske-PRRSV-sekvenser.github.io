@@ -155,7 +155,12 @@
                 <a class="button" id="submitx" onclick="zoomIn()">Zoom in</a>
                 <a class="button" id="submitx" onclick="zoomOut()">Zoom out</a>
                 <a class="button" id="submitx" onclick="resetZoom()">Reset zoom</a>
-                <input type="checkbox" id="tips" name="tips"><label>align tips</label>
+                <input type="checkbox" id="tips" onclick="buildTree(treePath)" ><label>align tips</label><br/>
+				<label>Color by</label>
+				<select id="colorby" onclick="buildTree(treePath)"> 
+					<option value="0">Country</option> 
+					<option value="1">Cluster</option> 
+				</select>
             </form>
         </div>
     </div>
@@ -164,6 +169,8 @@
     <script>
         //Globals
         var clades = new Set();
+		var cladeIndex = 0;		//Variable to control colored trait
+		var treePath = "tree/prrsv1.nwk";
         var color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 5]);
         var zoom = d3.zoom()
             .on('zoom', handleZoom)
@@ -172,7 +179,7 @@
         //Page load
         $(document).ready(function () {
             // Generate Phylogenetic Tree 
-            buildTree("tree/prrsv1.nwk");
+            buildTree(treePath);
 
             //Connect button to highlight
             $("#submit").on("click", zoomTaxa);
@@ -251,7 +258,6 @@
                     const zoomTransform = d3.zoomIdentity
                         .translate(d.x - (width * 0.5), d.y - (height * 0.5))
                         .scale(2.0);
-                    console.log(d);
                     container.transition()
                         .duration(200)
                         .call(zoom.transform, zoomTransform);
@@ -273,9 +279,9 @@
             }
 
             // Switch tree displayed based on click, append active class
-            console.log(treeName)
-            if (treeName == "PRRSV1") { buildTree("tree/prrsv1.nwk"); }
-            if (treeName == "PRRSV2") { buildTree("tree/prrsv2.nwk"); }
+            if (treeName == "PRRSV1") { treePath = "tree/prrsv1.nwk"; }
+            if (treeName == "PRRSV2") { treePath = "tree/prrsv2.nwk"; }
+			buildTree(treePath);
             evt.currentTarget.className += " active";
         }
 
@@ -296,13 +302,16 @@
             var height = 800, width = 900;
             var tree = new phylotree.phylotree(treeData);
 
+			//Set 'clade' grouping index
+			cladeIndex = document.getElementById('colorby').value;
+			
             // get classes using a set
             clades = new Set(); //semi-global
             let tips = tree.getTips();
             for (let i = 0; i < tips.length; i++) {
                 clade = tips[i].data.name.split("_");
                 if (clade.length > 1) {
-                    clades.add(clade[0])
+                    clades.add(clade[cladeIndex])
                 };
             }
 
@@ -312,7 +321,7 @@
             //Set up color scale
             color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, clades.length + 1]);
 
-            //Check if tip alignmenti s desired
+            //Check if tip alignmentis desired
             let alignTips = document.getElementById('tips').checked;
 
             // render the tree
@@ -446,7 +455,7 @@
                 .attr("cx", 10)
                 .attr("cy", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
-                .style("fill", function (d, i) { return color_scale(i) });
+                .style("fill", function (d, i) { return (d == "na") ? "#999" : color_scale(i) });
 
             // Add one dot in the legend for each name.
             svg.selectAll("labels")
@@ -455,7 +464,7 @@
                 .append("text")
                 .attr("x", 30)
                 .attr("y", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
-                .style("fill", function (d, i) { return color_scale(i) })
+                .style("fill", function (d, i) {  return (d == "na") ? "#999" : color_scale(i) })
                 .text(function (d) { return d })
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
@@ -465,25 +474,31 @@
         function colorNodesByName(element, data) {
             var m = (data.data.name).split("_");
             if (m.length > 1) {
-                element.style("fill", color_scale(clades.indexOf(m[0])));
+                element.style("fill", color_scale(clades.indexOf(m[cladeIndex])));
 
                 //Vaccine highlights
-                if (data.data.name.toLowerCase().includes("ingelvac") |
-                    data.data.name.toLowerCase().includes("vax") | 
+                if (data.data.name.toLowerCase().includes("vax") | 
                     data.data.name.toLowerCase().includes("ref")) {
                     element.classed("hilitevax", true);
                     //element.style("stroke", "red");
                 }
+				
+				//Black out NA if cladeIndex == 1
+				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
+					element.style("fill", "#999");
+				}
             }
         };
 
         function colorEdgesByTarget(element, data) {
             var m = (data.target.data.name).split("_");
             if (m.length > 1) {
-                element.style("stroke", color_scale(clades.indexOf(m[0])));
-            }
-            else {
-
+                element.style("stroke", color_scale(clades.indexOf(m[cladeIndex])));
+				
+				//Black out NA if cladeIndex == 1
+				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
+					element.style("stroke", "#999");
+				}
             }
         };
 
