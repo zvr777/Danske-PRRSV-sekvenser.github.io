@@ -140,6 +140,10 @@
             overflow: hidden;
         }*/
 
+		th {
+			background-color: #EEE;
+		}
+		
         .chartChild {
             width: 50%;
             float: left;
@@ -193,12 +197,11 @@
         }
     </style>
     <script src="/js/jquery.min.js"></script>
-    <script src="http://prrsv.vdl.iastate.edu/js/prrsv-vaccine-strains.js"></script>
-    <script src="/js/uniq_prrsv2.aln_out.js"></script>
+    <script src="/js/prrsv1_class.js"></script>
     <script src="/js/align.js"></script>
     <script src="/js/d3.v6.min.js"></script>
-    <script src="http://prrsv.vdl.iastate.edu/js/nj.js"></script>
-    <script src="http://prrsv.vdl.iastate.edu/js/patristic/main.js"></script>
+    <script src="/js/nj.js"></script>
+    <script src="/js/patristic.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="/js/phylotree.js"></script>	
@@ -322,10 +325,45 @@
                 //Align sequences
                 sequenceProcess(seqList);
 
-                //Generate tables
-                //Assign to table
+				//Assign events for collapse
+				addEvents();
+				
                 return;
             }
+
+			function addEvents() {
+				/*// Find all elements that have collapsible class
+                var coll = document.getElementsByClassName('collapsible');
+				
+                // Toggle the following div element to expand or collapse
+                for (var i = 0; i < coll.length; i++) {
+					coll[i].addEventListener('click', function() {
+						//this.classList.toggle('active');
+                        var content = this.nextElementSibling;
+                        if (content.style.height) {
+                            content.style.height = null;
+                            $('.show_hide').val( $('.collapsible').length == $('.collapsible.active').length ? 'Collapse All' : 'Expand All' );
+                        } else {
+                            content.style.height = 'auto';//content.scrollHeight + 'px';
+                            $('.show_hide').val( $('.collapsible').length == $('.collapsible.active').length ? 'Collapse All' : 'Expand All' );
+                        }
+					});
+                }
+
+                /*$('.show_hide').on('click', function(){
+                        //var maxDivHeight = $('div.content')[0].scrollHeight + 'px';
+                        if($(this).val() == 'Expand All') {
+                                $('.collapsible').addClass('active');
+                                $('div.content').css('height', 'auto');
+                        }
+                        else {
+                                $('.collapsible').removeClass('active');
+                                $('div.content').css('height', '');
+                        }
+                        // Change the button text on expansion nd collapse
+                        $(this).val( $(this).val() == 'Expand All' ? 'Collapse All' : 'Expand All' );
+		});*/
+			}
 
             /**
              * Converts a FASTA formatted string into an array
@@ -486,8 +524,10 @@
                     <tbody>
                       <tr>
                         <th>Nearest Taxa</th>
+						<th>Lineage</th>
                       </tr>
                       <tr>
+						<td id="${cleanName}_nearest"><a id="${cleanName}_nearest"></a></td>
                         <td><a href="javascript:;" id="${cleanName}" tree=""></a></td>
                       </tr>
                     </tbody>
@@ -559,9 +599,14 @@
                 //Patristric distance and identity distance are not always the same. Also, the tree rearranges the indices, so extracting the equiv distance is different
                 let alignIdentity = ((1 - (distMat[treeTaxa.length - 1][lineage_taxa.indexOf(nearest)])) * 100).toFixed(2);
                 console.log(alignIdentity);
+				
+				//Pull lineage from index 1 of name
+				let cladeName = nearest.split("_")[1];
 
                 //$(taxon).text(nearest + " (" + alignIdentity + "%) " + " (Tree)");
-                document.getElementById(taxon).text = nearest + " (" + alignIdentity + "%) " + " (Tree)";
+				document.getElementById(taxon + "_nearest").innerHTML = nearest;
+				console.log(taxon + "_nearest");
+                document.getElementById(taxon).text = cladeName + " (" + alignIdentity + "%) " + " (Tree)";
 
                 return;
             }
@@ -600,6 +645,8 @@
 					.on("click", null);
 
                 $(svgTree).toggle('slow');
+				let mid = phylotree.computeMidpoint(tree);
+				tree.reroot(mid.location);
 
                 return;
             }
@@ -611,12 +658,12 @@
                 * @param {Object} data - This parameter consists of an object of a tree node
                 */
             function nodeStyler(element, data) {
-                try {
-                    if (data.name.includes("|query")) {
-                        element.style("fill", "#0000FF");
-                    }
+				//Vaccine/Query highlights
+                if (data.data.name.toLowerCase().includes("|query")) {
+                    element.style("fill", "blue");
                 }
-                catch (e) {
+				if (data.data.name.toLowerCase().includes("vax")) {
+                    element.style("fill", "red");
                 }
             }
 
