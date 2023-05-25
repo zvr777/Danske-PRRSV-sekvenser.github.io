@@ -160,6 +160,7 @@
 				<select id="colorby" onclick="buildTree(treePath)"> 
 					<option value="0">Country</option> 
 					<option value="1">Cluster</option> 
+					<option value="2" selected>Denmark</option> 
 				</select>
             </form>
         </div>
@@ -169,7 +170,7 @@
     <script>
         //Globals
         var clades = new Set();
-		var cladeIndex = 0;		//Variable to control colored trait
+		var cladeIndex = 2;		//Variable to control colored trait
 		var treePath = "tree/prrsv1.nwk";
         var color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 5]);
         var zoom = d3.zoom()
@@ -315,6 +316,11 @@
                 };
             }
 
+			//Custom clades for DK
+			if(cladeIndex ==2) {
+				clades = ['DK','na']
+			};
+			
             // convert to array
             clades = [...clades].sort();
 
@@ -422,11 +428,6 @@
 
             //Build details	
             menu_object.append("li").append("strong").text(caseName[0]);
-            /*menu_object.append("li").text("State: " + caseName[1]);
-            menu_object.append("li").text("Date: " + caseName[2]);
-            menu_object.append("li").text("Lineage: " + caseName[3]);
-            menu_object.append("li").text("RFLP: " + caseName[4]);*/
-
 
             let tree_container = $("#tree_display"); // eslint-disable-line
             let coordinates = d3.pointer(tree_container[0]);
@@ -440,7 +441,7 @@
                 .style("display", "block");
         }
 
-        function createLegend() {
+        function createLegend() {			
             // select the svg area
             d3.select("#compartment-legend > *").remove();  //Clear
             var svg = d3.select("#compartment-legend").append("svg")
@@ -474,19 +475,29 @@
         function colorNodesByName(element, data) {
             var m = (data.data.name).split("_");
             if (m.length > 1) {
-                element.style("fill", color_scale(clades.indexOf(m[cladeIndex])));
+				if(cladeIndex == 0 | cladeIndex == 1) {
+					element.style("fill", color_scale(clades.indexOf(m[cladeIndex])));
+				}
 
+				if(cladeIndex == 2) {
+					if (!data.data.name.toLowerCase().includes("dk_")){
+						element.style("fill", "#999");
+					}
+					else {
+						element.style("fill", color_scale(clades.indexOf(m[0])));
+					}
+				}
+				
+				//Black out NA if cladeIndex == 1
+				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
+					element.style("fill", "#999");
+				}
                 //Vaccine highlights
                 if (data.data.name.toLowerCase().includes("vax") | 
                     data.data.name.toLowerCase().includes("ref")) {
                     element.classed("hilitevax", true);
                     //element.style("stroke", "red");
                 }
-				
-				//Black out NA if cladeIndex == 1
-				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
-					element.style("fill", "#999");
-				}
             }
         };
 
@@ -494,6 +505,15 @@
             var m = (data.target.data.name).split("_");
             if (m.length > 1) {
                 element.style("stroke", color_scale(clades.indexOf(m[cladeIndex])));
+				
+				if(cladeIndex == 2) {
+					if (!m[0].toLowerCase().includes("dk")){
+						element.style("stroke", "#999");
+					}
+					else {
+						element.style("stroke", color_scale(clades.indexOf(m[0])));
+					}
+				}
 				
 				//Black out NA if cladeIndex == 1
 				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
