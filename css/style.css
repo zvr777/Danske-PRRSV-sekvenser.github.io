@@ -523,8 +523,7 @@ table td {
  * Site footer
  */
 .site-footer {
-  border-top: 1px solid #e8e8e8;
-  padding: 30px 0;
+  padding: 0;
 }
 
 .footer-heading {
@@ -594,8 +593,7 @@ table td {
  * Page content
  */
 .page-content {
-  padding: 30px 0;
-  flex: 1 0 auto;
+  padding: 0px 0;
 }
 
 .page-heading {
@@ -726,7 +724,7 @@ table td {
   }
 }
 .site-footer {
-  padding-bottom: 120px;
+  padding-bottom: 20px;
 }
 
 .sub-footer {
@@ -773,8 +771,12 @@ table td {
   border-color: transparent transparent #f0f0f0;
 }
 
+.home {
+	padding-left: 20px;
+    padding-right: 20px;
+}
+
  .wrapper {
-            border: 1px solid #000;
             width: 1200px;
             margin: auto;
             margin-top: 0px;
