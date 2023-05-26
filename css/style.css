@@ -423,6 +423,7 @@ table td {
 .site-header {
   min-height: 55.95px;
   line-height: 54px;
+  padding-top: 10px;
   position: relative;
 }
 
