@@ -454,7 +454,7 @@
                 .attr("cx", 10)
                 .attr("cy", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
-                .style("fill", function (d, i) { return (d == "na") ? "#999" : color_scale(i) });
+                .style("fill", function (d, i) { return (d == "na" | d == "nd") ? "#999" : color_scale(i) });
 
             // Add one dot in the legend for each name.
             svg.selectAll("labels")
@@ -463,7 +463,7 @@
                 .append("text")
                 .attr("x", 30)
                 .attr("y", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
-                .style("fill", function (d, i) {  return (d == "na") ? "#999" : color_scale(i) })
+                .style("fill", function (d, i) {  return (d == "na" | d == "nd") ? "#999" : color_scale(i) })
                 .text(function (d) { return d })
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
@@ -487,7 +487,7 @@
 				}
 				
 				//Black out NA if cladeIndex == 1
-				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
+				if (m[1].toLowerCase() == "nd" && cladeIndex == 1) {			
 					element.style("fill", "#999");
 				}
                 //Vaccine highlights
@@ -514,7 +514,7 @@
 				}
 				
 				//Black out NA if cladeIndex == 1
-				if (m[1].toLowerCase() == "na" && cladeIndex == 1) {			
+				if (m[1].toLowerCase() == "nd" && cladeIndex == 1) {			
 					element.style("stroke", "#999");
 				}
             }
