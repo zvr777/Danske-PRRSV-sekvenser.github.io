@@ -2,4 +2,4 @@
 
 Velkommen til vores nye PRRSV hjemmeside.
 
-[View the PRRSv Trees](https://prrsv.dk/search_tree.html)
+[View the PRRSV Trees](https://prrsv.dk/search_tree.html)
