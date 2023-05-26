@@ -1,5 +1,3 @@
-<!-- credit D3 and phylotree.js-->
-
 <html>
 <head>
     <title>PRRS Virus Tree View</title>
@@ -310,7 +308,7 @@
             clades = new Set(); //semi-global
             let tips = tree.getTips();
             for (let i = 0; i < tips.length; i++) {
-                clade = tips[i].data.name.split("_");
+                clade = tips[i].data.name.split("-");
                 if (clade.length > 1) {
                     clades.add(clade[cladeIndex])
                 };
@@ -473,7 +471,7 @@
         }
 
         function colorNodesByName(element, data) {
-            var m = (data.data.name).split("_");
+            var m = (data.data.name).split("-");
             if (m.length > 1) {
 				if(cladeIndex == 0 | cladeIndex == 1) {
 					element.style("fill", color_scale(clades.indexOf(m[cladeIndex])));
@@ -502,7 +500,7 @@
         };
 
         function colorEdgesByTarget(element, data) {
-            var m = (data.target.data.name).split("_");
+            var m = (data.target.data.name).split("-");
             if (m.length > 1) {
                 element.style("stroke", color_scale(clades.indexOf(m[cladeIndex])));
 				
