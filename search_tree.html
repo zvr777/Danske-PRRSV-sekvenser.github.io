@@ -501,6 +501,11 @@
 
         function colorEdgesByTarget(element, data) {
             var m = (data.target.data.name).split("-");
+			
+			//Shrink edge size
+			element.style("stroke-width", 1);
+			
+			//Color based on criteria
             if (m.length > 1) {
                 element.style("stroke", color_scale(clades.indexOf(m[cladeIndex])));
 				
