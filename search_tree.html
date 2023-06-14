@@ -170,7 +170,7 @@
         var clades = new Set();
 		var cladeIndex = 2;		//Variable to control colored trait
 		var treePath = "tree/prrsv1.nwk";
-        var color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 5]);
+        var color_scale = d3.scaleSequential(d3.interpolateHclLong).domain([1, 5]);
         var zoom = d3.zoom()
             .on('zoom', handleZoom)
             .scaleExtent([0.5, 5]);
@@ -323,7 +323,7 @@
             clades = [...clades].sort();
 
             //Set up color scale
-            color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, clades.length + 1]);
+            color_scale = d3.scaleSequential(d3.interpolateHclLong).domain([1, clades.length + 1]);
 
             //Check if tip alignmentis desired
             let alignTips = document.getElementById('tips').checked;
@@ -456,7 +456,7 @@
                 .attr("r", 7)
                 .style("fill", function (d, i) { return (d.toLowerCase() == "non_danish") ? "#999" : color_scale(i) });
 
-            // Add one dot in the legend for each name.
+            // Add one label in the legend for each name.
             svg.selectAll("labels")
                 .data(clades)
                 .enter()
