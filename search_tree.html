@@ -491,10 +491,10 @@
 					element.style("fill", "#999");
 				}
                 //Vaccine highlights
-                if (data.data.name.toLowerCase().includes("vax") | 
+                if (data.data.name.toLowerCase().includes("vax-") | 
                     data.data.name.toLowerCase().includes("ref")) {
                     element.classed("hilitevax", true);
-                    element.style("fill", "red");
+                    element.style("fill", "black");
                 }
             }
         };
