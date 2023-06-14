@@ -316,7 +316,7 @@
 
 			//Custom clades for DK
 			if(cladeIndex ==2) {
-				clades = ['DK','na']
+				clades = ['Danish','Non_Danish']
 			};
 			
             // convert to array
@@ -454,7 +454,7 @@
                 .attr("cx", 10)
                 .attr("cy", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
-                .style("fill", function (d, i) { return (d.toLowerCase() == "na" | d.toLowerCase() == "nd") ? "#999" : color_scale(i) });
+                .style("fill", function (d, i) { return (d.toLowerCase() == "non_danish") ? "#999" : color_scale(i) });
 
             // Add one dot in the legend for each name.
             svg.selectAll("labels")
@@ -463,7 +463,7 @@
                 .append("text")
                 .attr("x", 30)
                 .attr("y", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
-                .style("fill", function (d, i) {  return (d.toLowerCase() == "na" | d.toLowerCase() == "nd") ? "#999" : color_scale(i) })
+                .style("fill", function (d, i) {  return (d.toLowerCase() == "non_danish") ? "#999" : color_scale(i) })
                 .text(function (d) { return d })
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
@@ -494,7 +494,7 @@
                 if (data.data.name.toLowerCase().includes("vax-") | 
                     data.data.name.toLowerCase().includes("ref")) {
                     element.classed("hilitevax", true);
-                    element.style("fill", "black");
+                    element.style("fill", "red");
                 }
             }
         };
