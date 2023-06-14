@@ -478,11 +478,11 @@
 				}
 
 				if(cladeIndex == 2) {
-					if (!data.data.name.toLowerCase().includes("dk-")){
-						element.style("fill", "#999");
+					if (m[0].toLowerCase().includes("dk")){
+						element.style("stroke", "blue");
 					}
 					else {
-						element.style("fill", color_scale(clades.indexOf(m[0])));
+						element.style("stroke", "#999");
 					}
 				}
 				
@@ -510,11 +510,11 @@
                 element.style("stroke", color_scale(clades.indexOf(m[cladeIndex])));
 				
 				if(cladeIndex == 2) {
-					if (!m[0].toLowerCase().includes("dk")){
-						element.style("stroke", "#999");
+					if (m[0].toLowerCase().includes("dk")){
+						element.style("stroke", "blue");
 					}
 					else {
-						element.style("stroke", color_scale(clades.indexOf(m[0])));
+						element.style("stroke", "#999");
 					}
 				}
 				
