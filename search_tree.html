@@ -170,7 +170,7 @@
         var clades = new Set();
 		var cladeIndex = 2;		//Variable to control colored trait
 		var treePath = "tree/prrsv1.nwk";
-        var color_scale = d3.scaleSequential(d3.interpolateWarm).domain([1, 5]);
+        var color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 5]);
         var zoom = d3.zoom()
             .on('zoom', handleZoom)
             .scaleExtent([0.5, 5]);
@@ -323,7 +323,7 @@
             clades = [...clades].sort();
 
             //Set up color scale
-            color_scale = d3.scaleSequential(d3.interpolateWarm).domain([1, clades.length + 1]);
+            color_scale = d3.scaleSequential(d3.interpolateRainbow).domain([1, clades.length + 1]);
 
             //Check if tip alignmentis desired
             let alignTips = document.getElementById('tips').checked;
@@ -463,7 +463,7 @@
                 .append("text")
                 .attr("x", 30)
                 .attr("y", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
-                .style("fill", function (d, i) {  return (d.toLowerCase() == "non_danish") ? "#999" : color_scale(i) })
+                .style("fill", function (d, i) {  return (d.toLowerCase() == "non_danish") ? "#999" : ( (d.toLowerCase() == "danish") ? "blue" : color_scale(i)) })
                 .text(function (d) { return d })
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
