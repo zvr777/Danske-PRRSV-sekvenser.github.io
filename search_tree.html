@@ -454,7 +454,7 @@
                 .attr("cx", 10)
                 .attr("cy", function (d, i) { return 50 + i * 25 }) // 500 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
-                .style("fill", function (d, i) { return (d.toLowerCase() == "non_danish") ? "#999" : ( (d.toLowerCase() == "non_danish") ? "blue" : color_scale(i)) });
+                .style("fill", function (d, i) { return (d.toLowerCase() == "non_danish") ? "#999" : ( (d.toLowerCase() == "danish") ? "blue" : color_scale(i)) });
 
             // Add one label in the legend for each name.
             svg.selectAll("labels")
