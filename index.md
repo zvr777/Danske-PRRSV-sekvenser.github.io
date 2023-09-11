@@ -2,18 +2,18 @@
 
 **Velkommen til PRRSV.dk**
 
-Dette er en hjemmeside som viser danske PRRSV ORF5 sekvenser i fylogenetiske træer.
+Dette er en hjemmeside som viser danske PRRSV ORF5 sekvenser i fylogenetiske træer. Hvis du har indsendt en prøve til sekventering vil du på denne hjemmeside kunne bruge sagsnummeret til at fremsøge netop din sekvens i de fylogenetiske træer. Du kan hermed se hvor tæt beslægtet din sekvens er med andre danske og udenlandske PRRSV sekvenser, samt PRRSV vaccinestammer.
 
 Siden det store PRRSV-1 udbrud i sommeren 2019 har fokus på PRRSV og dennes diversitet fået et øget fokus. Dette fokus har resulteret i en stor stigning i antallet af PRRSV sekventeringer.
 Den øgede mængde at PRRSV sekvenser har vist, at der i Danmark er en stor genetisk diversitet indenfor PRRSV-1, mens vi for PRRSV-2 stadigvæk ser en stor lighed til VR2332 stammen.
 Alle danske PRRSV-1 og PRRSV-2 ORF5 sekvenser sekventeret siden hhv. 1992 og 1996 er inkluderet i de fylogenetiske træer sammen med relevante udenlandske ORF5 sekvenser og vaccinestammer.
-For at lokalisere en given specifik sekvens i de fylogenetiske træer, bruges det sags nr. der står på det udsendte laboratoriesvar med sekvensanalyse resultatet.
+
 De fylogenetiske træer vil løbende blive opdateret med PRRSV ORF5 sekvenser som bliver sekventeret på Københavns Universitet, enten via bestilling eller i forskningsprojekter.
 
 
 **Er du interesseret i at få PRRSV positive prøver sekventeret?**
 
-I 2023 tilbyder Københavns Universitet gratis sekventering i forbindelse med et SAF-2023 projekt. Hvis prøvemateriale er testet positiv for PRRSV på enten SSI eller Veterinært Laboratorium, Kjellerup kan vi arrangere udlevering af materiale til sekventering. Kontakt: Chefforsker Elisabeth Okholm Nielsen, SEGES Innovation P/S, e-mail: elin@seges.dk.
+I 2023 tilbyder Københavns Universitet gratis PRRSV sekventering i forbindelse med et SAF-2023 projekt. Hvis prøvemateriale er testet positiv for PRRSV på enten SSI eller Veterinært Laboratorium, Kjellerup kan vi arrangere udlevering af materiale til sekventering. Ønskes dette tilbud kontakt dermed laboratoriet hvor prøven er testet, eller kontakt virologi-gruppen på KU direkte via e-mail: viradiagnostik@sund.ku.dk eller telefon 35321617.
 
 
 **For yderligere spørgsmål kontakt:**
@@ -59,7 +59,7 @@ Det er i sådanne tilfælde et fylogenetisk træ kan give et overblik af sammenh
 
 **Subtyper, clusters og lineages** 
 
-PRRSV stammer kan inddeles i clusters og lineages som kan give et hurtigt overblik over hvor en bestemt virussekvens ligger i det fylogenetiske træ.
+PRRSV stammer kan inddeles i clusters og lineages, som kan give et hurtigt overblik over hvor en bestemt virussekvens ligger i det fylogenetiske træ.
 
 PRRSV-1 er inddelt i 3 subtyper; subtype 1, subtype 2 og subtype 3. I Danmark og central Europa er kun subtype 1 virus detekteret. Subtype 2 og subtype 3 er indtil videre kun detekteret i lande øst for Polen, så som Rusland og Belarus.
 
