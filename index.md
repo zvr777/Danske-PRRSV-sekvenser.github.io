@@ -13,7 +13,7 @@ De fylogenetiske træer vil løbende blive opdateret med PRRSV ORF5 sekvenser so
 
 **Er du interesseret i at få PRRSV positive prøver sekventeret?**
 
-I 2023 tilbyder Københavns Universitet gratis PRRSV sekventering i forbindelse med et SAF-2023 projekt. Hvis prøvemateriale er testet positiv for PRRSV på enten SSI eller Veterinært Laboratorium, Kjellerup kan vi arrangere udlevering af materiale til sekventering. Ønskes dette tilbud kontakt dermed laboratoriet hvor prøven er testet, eller kontakt virologi-gruppen på KU direkte via e-mail: viradiagnostik@sund.ku.dk eller telefon 35321617.
+I 2023 tilbyder Københavns Universitet gratis PRRSV sekventering i forbindelse med et SAF-2023 projekt. Hvis prøvemateriale er testet positiv for PRRSV på enten SSI eller Veterinært Laboratorium, Kjellerup kan vi arrangere udlevering af materiale til sekventering. Ønskes dette tilbud kontakt dermed laboratoriet hvor prøven er testet, eller kontakt virologi-gruppen på KU direkte via e-mail: mailto:viradiagnostik@sund.ku.dk eller telefon 35321617.
 
 
 **For yderligere spørgsmål kontakt:**
